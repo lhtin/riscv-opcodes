@@ -943,11 +943,9 @@ def check_extensions (extensions):
   base_ext = "rv"
   for ext_name in extensions:
     ext = get_base_ext(ext_name)
-    if base_ext == ext or ext == "rv":
-      continue
-    elif base_ext == "rv":
+    if base_ext == "rv":
       base_ext = ext
-    else:
+    elif base_ext != ext:
       logging.error("Contains a variety of base extensions")
       sys.exit(1)
 
