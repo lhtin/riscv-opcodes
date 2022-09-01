@@ -1,3 +1,5 @@
+$include rv_c
+
 # quadrant 1
 c.jal c_imm12              1..0=1 15..13=1
 $pseudo_op rv64_c::c.srli c.srli rd_rs1_p c_nzuimm5  1..0=1 15..13=4 12..10=0

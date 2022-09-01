@@ -23,6 +23,7 @@ pseudo_regex = re.compile(
 
 imported_regex = re.compile('^\s*\$import\s*(?P<extension>.*)\s*::\s*(?P<instruction>.*)', re.M)
 
+included_regex = re.compile('^\$include\s+([^ ]+)', re.M)
 #
 # Trap cause codes
 causes = [

@@ -1,3 +1,5 @@
+$incude rv_c
+
 # quadrant 0
 c.ld rd_p rs1_p c_uimm8lo c_uimm8hi     1..0=0 15..13=3
 c.sd rs1_p rs2_p c_uimm8hi c_uimm8lo    1..0=0 15..13=7

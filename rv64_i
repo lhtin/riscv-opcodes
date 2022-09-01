@@ -1,3 +1,5 @@
+$include rv_i
+
 # RV64I additions to RV32I
 
 lwu     rd rs1       imm12 14..12=6 6..2=0x00 1..0=3

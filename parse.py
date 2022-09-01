@@ -147,6 +147,23 @@ def same_base_ext (ext_name, ext_name_list):
             return True
     return False
 
+def get_lines (file_path):
+    with open(file_path, 'r') as file:
+        lines = (line.rstrip()
+                for line in file)  # All lines including the blank ones
+        lines = list(line for line in lines if line)  # Non-blank lines
+        lines = list(
+            line for line in lines
+            if not line.startswith("#"))  # remove comment lines
+        new_lines = []
+        for line in lines:
+            if line.startswith('$include'):
+                include_file_name = os.path.join(os.path.dirname(file_path), included_regex.findall(line)[0])
+                new_lines += get_lines(include_file_name)
+            else:
+                new_lines.append(line)
+        return new_lines
+
 def create_inst_dict(file_filter, include_pseudo=False, include_pseudo_ops=[]):
     '''
     This function return a dictionary containing all instructions associated
@@ -189,19 +206,17 @@ def create_inst_dict(file_filter, include_pseudo=False, include_pseudo_ops=[]):
     # file_names contains all files to be parsed in the riscv-opcodes directory
     file_names = []
     for fil in file_filter:
-        file_names += glob.glob(f'{opcodes_dir}{fil}')
+        new_file_names = glob.glob(f'{opcodes_dir}{fil}')
+        if len(new_file_names) == 0:
+            logging.error(f"Extension {fil} doesn't exit.")
+            sys.exit(1)
+        file_names += new_file_names
     file_names.sort(reverse=True)
     # first pass if for standard/regular instructions
     logging.debug('Collecting standard instructions first')
     for f in file_names:
         logging.debug(f'Parsing File: {f} for standard instructions')
-        with open(f) as fp:
-            lines = (line.rstrip()
-                     for line in fp)  # All lines including the blank ones
-            lines = list(line for line in lines if line)  # Non-blank lines
-            lines = list(
-                line for line in lines
-                if not line.startswith("#"))  # remove comment lines
+        lines = get_lines(f)
 
         # go through each line of the file
         for line in lines:
@@ -257,13 +272,7 @@ def create_inst_dict(file_filter, include_pseudo=False, include_pseudo_ops=[]):
     logging.debug('Collecting pseudo instructions now')
     for f in file_names:
         logging.debug(f'Parsing File: {f} for pseudo_ops')
-        with open(f) as fp:
-            lines = (line.rstrip()
-                     for line in fp)  # All lines including the blank ones
-            lines = list(line for line in lines if line)  # Non-blank lines
-            lines = list(
-                line for line in lines
-                if not line.startswith("#"))  # remove comment lines
+        lines = get_lines(f)
 
         # go through each line of the file
         for line in lines:
@@ -320,13 +329,7 @@ def create_inst_dict(file_filter, include_pseudo=False, include_pseudo_ops=[]):
     logging.debug('Collecting imported instructions')
     for f in file_names:
         logging.debug(f'Parsing File: {f} for imported ops')
-        with open(f) as fp:
-            lines = (line.rstrip()
-                     for line in fp)  # All lines including the blank ones
-            lines = list(line for line in lines if line)  # Non-blank lines
-            lines = list(
-                line for line in lines
-                if not line.startswith("#"))  # remove comment lines
+        lines = get_lines(f)
 
         # go through each line of the file
         for line in lines:
