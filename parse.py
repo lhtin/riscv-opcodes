@@ -960,6 +960,8 @@ if __name__ == "__main__":
 
     check_extensions(extensions)
 
+    base_ext = get_base_ext(extensions[0])
+
     include_pseudo = False
     if "-go" in sys.argv[1:]:
         include_pseudo = True
@@ -967,6 +969,10 @@ if __name__ == "__main__":
     instr_dict = create_inst_dict(extensions, include_pseudo)
     with open('instr_dict.yaml', 'w') as outfile:
         yaml.dump(instr_dict, outfile, default_flow_style=False)
+    with open(f"instr_dict_{base_ext}.yaml", 'w') as outfile:
+        yaml.safe_dump({
+            "insns": instr_dict
+        }, outfile, default_flow_style=False)
     instr_dict = collections.OrderedDict(sorted(instr_dict.items()))
 
     if '-c' in sys.argv[1:]:

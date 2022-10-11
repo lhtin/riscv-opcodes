@@ -1,4 +1,6 @@
 $include rv_c
+$include rv32_c_f
+$include rv_c_d
 
 # quadrant 1
 c.jal c_imm12              1..0=1 15..13=1

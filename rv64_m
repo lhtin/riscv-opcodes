@@ -1,4 +1,4 @@
-$incude rv_m
+$include rv_m
 
 # RV64M additions to RV32M
 mulw    rd rs1 rs2 31..25=1 14..12=0 6..2=0x0E 1..0=3

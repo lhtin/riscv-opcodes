@@ -1,4 +1,4 @@
-$incude rv_d
+$include rv_d
 
 # RV64D additions to RV32D
 fcvt.l.d  rd rs1 24..20=2 31..27=0x18 rm       26..25=1 6..2=0x14 1..0=3

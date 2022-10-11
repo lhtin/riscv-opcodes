@@ -1,4 +1,5 @@
-$incude rv_c
+$include rv_c
+$include rv_c_d
 
 # quadrant 0
 c.ld rd_p rs1_p c_uimm8lo c_uimm8hi     1..0=0 15..13=3

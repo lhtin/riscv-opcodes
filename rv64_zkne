@@ -1,4 +1,4 @@
-$incude rv_zkne
+$include rv_zkne
 
 # Scalar AES - RV64
 aes64esm   rd rs1 rs2  31..30=0 29..25=0b11011          14..12=0b000 6..0=0x33

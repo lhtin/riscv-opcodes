@@ -1,4 +1,4 @@
-$incude rv_zba
+$include rv_zba
 
 add.uw     rd rs1 rs2 31..25=4  14..12=0 6..2=0x0E 1..0=3
 sh1add.uw  rd rs1 rs2 31..25=16 14..12=2 6..2=0x0E 1..0=3

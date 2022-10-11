@@ -1,4 +1,4 @@
-$incude rv_f
+$include rv_f
 
 # RV64F additions to RV32F
 

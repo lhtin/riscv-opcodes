@@ -1,4 +1,4 @@
-$incude rv_q
+$include rv_q
 
 # RV64Q additions to RV32Q
 
